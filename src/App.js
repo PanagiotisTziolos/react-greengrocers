@@ -1,7 +1,13 @@
 import './styles/reset.css'
 import './styles/index.css'
 
+import { useState } from 'react'
+
 import initialStoreItems from './store-items'
+
+import Header from './components/Header'
+import Main from './components/Main'
+import Footer from './components/Footer'
 
 /*
 Here's what a store item should look like
@@ -12,50 +18,34 @@ Here's what a store item should look like
 }
 
 What should a cart item look like? 🤔
+[
+  {
+    storeItem,
+    count
+  }
+]
 */
 
 console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+    const [storeItems, setStoreItems] = useState(initialStoreItems)
+    const [cartItems, setCartItems] = useState([])
 
-  return (
-    <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
-    </>
-  )
+	return (
+        <>
+            <Header
+              greengrocers={storeItems}
+              cartItems={cartItems}
+              updateCart={setCartItems}
+            />
+
+            <Main
+              cart={cartItems}
+              updateCart={setCartItems}
+            />
+
+            <Footer />
+		</>
+	)
 }
